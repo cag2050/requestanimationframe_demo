@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>用requestAnimationFrame优化动画，画了一个类似时钟</title>
+    <style>
+        .div1 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            border: 1px solid red;
+        }
+
+        .div2 {
+            width: 50px;
+            height: 1px;
+            background-color: red;
+            margin-top: 50px;
+            transform-origin: right;
+        }
+    </style>
+</head>
+<body>
+<div class="div1">
+    <div class="div2"></div>
+</div>
+<script>
+    (function () {
+        var degree = 0;
+
+        function update() {
+            var div1 = document.getElementsByClassName('div2')[0];
+            div1.style.transform = 'rotate(' + degree + 'deg)';
+            degree++;
+            requestAnimationFrame(update);
+        }
+
+        requestAnimationFrame(update);
+    })()
+</script>
+</body>
+</html>
